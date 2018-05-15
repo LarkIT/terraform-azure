@@ -6,7 +6,7 @@ resource "azurerm_public_ip" "public_ip" {
   public_ip_address_allocation = "dynamic"
 
   tags {
-    environment = "Terraform Demo"
+    builtby = "Terraform"
   }
 }
 
@@ -25,7 +25,7 @@ resource "azurerm_network_interface" "nic" {
   }
 
   tags {
-    environment = "Terraform Demo"
+    builtby = "Terraform"
   }
 }
 

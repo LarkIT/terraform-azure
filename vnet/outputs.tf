@@ -25,3 +25,7 @@ output "prod_app_subnet_id" {
 output "prod_db_subnet_id" {
   value = "${azurerm_subnet.prod_db_subnet.id}"
 }
+
+output "vnet_name" {
+  value = "${azurerm_virtual_network.vnet.name}"
+}
