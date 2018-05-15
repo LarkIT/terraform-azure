@@ -1,3 +1,11 @@
+output "location" {
+  value = "${var.location}"
+}
+
+output "environment" {
+  value = "${var.environment}"
+}
+
 output "rg_name" {
   value = "${local.resource_group}"
 }
