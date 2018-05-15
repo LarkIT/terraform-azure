@@ -2,7 +2,7 @@ resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.number_servers}"
   name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index}"
   location                     = "${var.location}"
-  resource_group_name          = "${var.rg}"
+  resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "dynamic"
 
   tags {
@@ -14,7 +14,7 @@ resource "azurerm_network_interface" "nic" {
   count                     = "${var.number_servers}"
   name                      = "${var.application_name}_${var.hostname}_nic_${count.index}"
   location                  = "${var.location}"
-  resource_group_name       = "${var.rg}"
+  resource_group_name       = "${var.resource_group}"
   network_security_group_id = "${var.security_group}"
 
   ip_configuration {
@@ -33,7 +33,7 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   count                 = "${var.number_servers}"
   name                  = "${var.application_name}_${var.hostname}_vm_${count.index}"
   location              = "${var.location}"
-  resource_group_name   = "${var.rg}"
+  resource_group_name   = "${var.resource_group}"
 #  network_interface_ids = ["${azurerm_network_interface.nic.id}"]
   network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
   vm_size               = "Standard_DS1_v2"

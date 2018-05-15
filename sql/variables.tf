@@ -7,7 +7,7 @@ variable "db_server_name" {
   default = "sqlserver"
 }
 variable "resource_group" {
-  description = "The name of the resource group in which to create the virtual network."
+  description = "The name of the resource group in which to create the SQL Server and DB."
 }
 
 variable "location" {
