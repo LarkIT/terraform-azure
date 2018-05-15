@@ -7,7 +7,7 @@ output "environment" {
 }
 
 output "rg_name" {
-  value = "${local.resource_group}"
+  value = "${azurerm_resource_group.rg.name}"
 }
 
 output "dmz_subnet_id" {
