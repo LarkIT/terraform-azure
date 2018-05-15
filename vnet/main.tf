@@ -1,5 +1,11 @@
 locals {
-  resource_group = "${var.resource_group_name}"
+  resource_group = "${var.environment}_${var.application_name}_vnet"
+  network        = "${var.network[ "${var.environment}" ]}"
+}
+
+resource "azurerm_resource_group" "rg" {
+  name     = "${local.resource_group}"
+  location = "${var.location}"
 }
 
 resource "azurerm_virtual_network" "vnet" {
@@ -8,46 +14,29 @@ resource "azurerm_virtual_network" "vnet" {
   location            = "${var.location}"
   resource_group_name = "${local.resource_group}"
   dns_servers         = "${var.dns_servers}"
+  depends_on          = ["azurerm_resource_group.rg"]
 }
 
-resource "azurerm_subnet" "test_dmz_subnet" {
+resource "azurerm_subnet" "dmz_subnet" {
   name                 = "${var.environment}_${var.application_name}_dmz_subnet"
   resource_group_name  = "${local.resource_group}"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "test_dmz" ]}"
+  address_prefix       = "${lookup(local.network, "dmz")}"
+  depends_on           = ["azurerm_virtual_network.vnet"]
 }
 
-resource "azurerm_subnet" "test_app_subnet" {
+resource "azurerm_subnet" "app_subnet" {
   name                 = "${var.environment}_${var.application_name}_app_subnet"
   resource_group_name  = "${local.resource_group}"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "test_app" ]}"
+  address_prefix       = "${lookup(local.network, "app")}"
+  depends_on           = ["azurerm_virtual_network.vnet"]
 }
 
-resource "azurerm_subnet" "test_db_subnet" {
+resource "azurerm_subnet" "db_subnet" {
   name                 = "${var.environment}_${var.application_name}_db_subnet"
   resource_group_name  = "${local.resource_group}"
   virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "test_db" ]}"
-}
-
-resource "azurerm_subnet" "prod_dmz_subnet" {
-  name                 = "prod_${var.environment}_${var.application_name}_dmz_subnet"
-  resource_group_name  = "${local.resource_group}"
-  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "prod_dmz" ]}"
-}
-
-resource "azurerm_subnet" "prod_app_subnet" {
-  name                 = "prod_${var.environment}_${var.application_name}_app_subnet"
-  resource_group_name  = "${local.resource_group}"
-  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "prod_app" ]}"
-}
-
-resource "azurerm_subnet" "prod_db_subnet" {
-  name                 = "prod_${var.environment}_${var.application_name}_db_subnet"
-  resource_group_name  = "${local.resource_group}"
-  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
-  address_prefix       = "${var.network[ "prod_db" ]}"
+  address_prefix       = "${lookup(local.network, "db")}"
+  depends_on           = ["azurerm_virtual_network.vnet"]
 }
