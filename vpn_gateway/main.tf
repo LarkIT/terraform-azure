@@ -1,44 +1,46 @@
 resource "azurerm_subnet" "gateway_subnet" {
-  name = "GatewaySubnet"
-  resource_group_name = "${var.resource_group}"
+  name                 = "GatewaySubnet"
+  resource_group_name  = "${var.resource_group}"
   virtual_network_name = "${var.vnet}"
-  address_prefix = "10.10.50.0/28"
+  address_prefix       = "10.10.50.0/28"
 }
 
 resource "azurerm_public_ip" "public_ip" {
-  name = "${var.environment}_${var.application_name}_vpn_gateway_public_ip"
-  location = "${var.location}"
-  resource_group_name = "${var.resource_group}"
+  name                         = "${var.environment}_${var.application_name}_vpn_gateway_public_ip"
+  location                     = "${var.location}"
+  resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "Dynamic"
+
   tags {
     builtby = "Terraform"
   }
 }
 
 resource "azurerm_virtual_network_gateway" "virtual_network_gateway" {
-  name = "${var.application_name}_${var.environment}_vpn_gateway"
-  location = "${var.location}"
+  name                = "${var.application_name}_${var.environment}_vpn_gateway"
+  location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
 
-  type = "Vpn"
+  type     = "Vpn"
   vpn_type = "RouteBased"
 
   active_active = false
-  enable_bgp = false
-    sku = "Basic"
+  enable_bgp    = false
+  sku           = "Basic"
 
   ip_configuration {
-    name = "vnetGatewayConfig"
-    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
+    name                          = "vnetGatewayConfig"
+    public_ip_address_id          = "${azurerm_public_ip.public_ip.id}"
     private_ip_address_allocation = "Dynamic"
-    subnet_id = "${azurerm_subnet.gateway_subnet.id}"
+    subnet_id                     = "${azurerm_subnet.gateway_subnet.id}"
   }
 
   vpn_client_configuration {
-    address_space = [ "10.20.50.0/24" ]
+    address_space = ["10.20.50.0/24"]
 
     root_certificate {
       name = "DigiCert-Federated-ID-Root-CA"
+
       public_cert_data = <<EOF
 MIIDuzCCAqOgAwIBAgIQCHTZWCM+IlfFIRXIvyKSrjANBgkqhkiG9w0BAQsFADBn
 MQswCQYDVQQGEwJVUzEVMBMGA1UEChMMRGlnaUNlcnQgSW5jMRkwFwYDVQQLExB3
@@ -63,6 +65,7 @@ M/s/1JRtO3bDSzD9TazRVzn2oBqzSa8VgIo5C1nOnoAKJTlsClJKvIhnRlaLQqk=
 EOF
     }
   }
+
   tags {
     builtby = "Terraform"
   }
