@@ -9,6 +9,6 @@ variable "vng_address_prefix"{
 }
 
 variable "vpn_client_address_space" {
-  type    = list
+  type    = "list"
   default = ["10.20.50.0/24"]
 }
