@@ -6,6 +6,10 @@ output "environment" {
   value = "${var.environment}"
 }
 
+output "application_name" {
+  value = "${var.application_name}"
+}
+
 output "rg_name" {
   value = "${azurerm_resource_group.rg.name}"
 }
