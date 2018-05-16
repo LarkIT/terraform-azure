@@ -48,10 +48,11 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   }
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    publisher    = "MicrosoftWindowsServer"
+    offer        = "WindowsServer"
+    sku          = "2016-Datacenter"
+    version      = "latest"
+    disk_size_gb = "${var.os_disk_size}"
   }
 
   os_profile {

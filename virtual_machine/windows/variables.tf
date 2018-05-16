@@ -14,3 +14,7 @@ variable "admin_username" {
 variable "number_servers" {
   default = "1"
 }
+
+variable "os_disk_size" {
+  default = "100"
+}
