@@ -16,5 +16,5 @@ variable "number_servers" {
 }
 
 variable "os_disk_size" {
-  default = "100"
+  default = "128"
 }
