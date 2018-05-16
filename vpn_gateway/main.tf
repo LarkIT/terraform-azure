@@ -2,7 +2,7 @@ resource "azurerm_subnet" "gateway_subnet" {
   name                 = "GatewaySubnet"
   resource_group_name  = "${var.resource_group}"
   virtual_network_name = "${var.vnet}"
-  address_prefix       = "10.10.50.0/28"
+  address_prefix       = "${var.vng_address_prefix}"
 }
 
 resource "azurerm_public_ip" "public_ip" {
@@ -36,7 +36,7 @@ resource "azurerm_virtual_network_gateway" "virtual_network_gateway" {
   }
 
   vpn_client_configuration {
-    address_space = ["10.20.50.0/24"]
+    address_space = "${var.vpn_client_address_space}"
 
     root_certificate {
       name = "DigiCert-Federated-ID-Root-CA"
