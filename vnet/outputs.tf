@@ -6,10 +6,6 @@ output "environment" {
   value = "${var.environment}"
 }
 
-output "vnet_name" {
-  value = "${azurerm_virtual_network.vnet.name}"
-}
-
 output "application_name" {
   value = "${var.application_name}"
 }
@@ -33,3 +29,4 @@ output "db_subnet_id" {
 output "vnet_name" {
   value = "${azurerm_virtual_network.vnet.name}"
 }
+
