@@ -12,7 +12,7 @@ resource "azurerm_subnet" "subnet" {
   #resource_group_name  = "${azurerm_resource_group.rg.name}"
   resource_group_name  = "test_themis_vnet"
   virtual_network_name = "${var.vnet_name}"
-  address_prefix       = "10.254.0.0/24"
+  address_prefix       = "10.10.30.0/24"
 }
 
 resource "azurerm_public_ip" "agw_pip" {
