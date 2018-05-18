@@ -43,6 +43,7 @@ resource "azurerm_application_gateway" "network" {
 
   backend_address_pool {
     name = "${var.vnet_name}-beap"
+    ip_address_list = [ "10.10.10.4" ]
   }
 
   backend_http_settings {
