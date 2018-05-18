@@ -9,7 +9,8 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_subnet" "subnet" {
   name                 = "${var.environment}_${var.application_name}_agw_subnet"
-  resource_group_name  = "${azurerm_resource_group.rg.name}"
+  #resource_group_name  = "${azurerm_resource_group.rg.name}"
+  resource_group_name  = "test_themis_vnet"
   virtual_network_name = "${var.vnet_name}"
   address_prefix       = "10.254.0.0/24"
 }
