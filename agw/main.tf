@@ -41,7 +41,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_port {
     name = "${var.vnet_name}-feport"
-    port = 80
+    port = 22
   }
 
   frontend_ip_configuration {
@@ -57,7 +57,7 @@ resource "azurerm_application_gateway" "network" {
   backend_http_settings {
     name                  = "${var.vnet_name}-be-htst"
     cookie_based_affinity = "Disabled"
-    port                  = 80
+    port                  = 22
     protocol              = "Http"
     request_timeout       = 1
   }
