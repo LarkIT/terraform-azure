@@ -14,3 +14,7 @@ variable "tier" {
 variable "capacity" {
   default = 2
 }
+
+variable "ip_address_list" {
+  type = list
+}
