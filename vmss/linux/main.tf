@@ -7,14 +7,14 @@ locals {
   tags = "${merge(local.default_tags, var.tags)}"
 }
 
-resource "azurerm_public_ip" "public_ip" {
-  name                         = "${var.environment}_${var.application_name}_public_ip"
-  location                     = "${var.location}"
-  resource_group_name          = "${var.resource_group}"
-  public_ip_address_allocation = "static"
-  domain_name_label            = "${var.environment}-${var.application_name}-vnet-rg"
-  tags                         = "${local.tags}"
-}
+#resource "azurerm_public_ip" "public_ip" {
+#  name                         = "${var.environment}_${var.application_name}_public_ip"
+#  location                     = "${var.location}"
+#  resource_group_name          = "${var.resource_group}"
+#  public_ip_address_allocation = "static"
+#  domain_name_label            = "${var.environment}-${var.application_name}-vnet-rg"
+#  tags                         = "${local.tags}"
+#}
 
 resource "azurerm_lb" "loadbalancer" {
   name                = "${var.environment}_${var.application_name}_loadbalancer"
@@ -22,10 +22,10 @@ resource "azurerm_lb" "loadbalancer" {
   resource_group_name = "${var.resource_group}"
 
   frontend_ip_configuration {
-    name                 = "PublicIPAddress"
-#    name                  = "FrontEndIP"
+#    name                 = "PublicIPAddress"
+    name                  = "FrontEndIP"
 #    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
-    subnet_id          = "${var.subnet_id}" 
+#    subnet_id          = "${var.subnet_id}" 
     private_ip_address = "10.10.10.9"   
 #    private_ip_address_allocation = "dynamic"
     private_ip_address_allocation = "static"
@@ -38,18 +38,18 @@ resource "azurerm_lb_backend_address_pool" "bpepool" {
   loadbalancer_id     = "${azurerm_lb.loadbalancer.id}"
 }
 
-resource "azurerm_lb_nat_pool" "lbnatpool" {
-  count                          = 3
-  name                           = "ssh"
-  resource_group_name            = "${var.resource_group}"
-  loadbalancer_id                = "${azurerm_lb.loadbalancer.id}"
-  protocol                       = "Tcp"
-  frontend_port_start            = 50000
-  frontend_port_end              = 50119
-  backend_port                   = 22
-  frontend_ip_configuration_name = "PublicIPAddress"
+#resource "azurerm_lb_nat_pool" "lbnatpool" {
+#  count                          = 3
+#  name                           = "ssh"
+#  resource_group_name            = "${var.resource_group}"
+#  loadbalancer_id                = "${azurerm_lb.loadbalancer.id}"
+#  protocol                       = "Tcp"
+#  frontend_port_start            = 50000
+#  frontend_port_end              = 50119
+#  backend_port                   = 22
+#  frontend_ip_configuration_name = "PublicIPAddress"
 #  frontend_ip_configuration_name = "FrontEndIP"
-}
+#}
 
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "${var.environment}_${var.application_name}_vmss"
@@ -108,7 +108,7 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
       name                                   = "TestIPConfiguration"
       subnet_id                              = "${var.subnet_id}"
       load_balancer_backend_address_pool_ids = ["${azurerm_lb_backend_address_pool.bpepool.id}"]
-      load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.lbnatpool.*.id, count.index)}"]
+#      load_balancer_inbound_nat_rules_ids    = ["${element(azurerm_lb_nat_pool.lbnatpool.*.id, count.index)}"]
     }
   }
 }
