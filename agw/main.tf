@@ -49,10 +49,8 @@ resource "azurerm_application_gateway" "network" {
   }
 
   backend_address_pool {
-    name = "${var.vnet_name}-beap"
-#     name = "BackEndAddressPool"
-#     name = "${var.bepool_name}"
-    ip_address_list = [ "10.10.10.9" ]
+    name            = "${var.vnet_name}-beap"
+    ip_address_list = ["10.10.10.9"]
   }
 
   backend_http_settings {
@@ -75,8 +73,6 @@ resource "azurerm_application_gateway" "network" {
     rule_type                  = "Basic"
     http_listener_name         = "${var.vnet_name}-httplstn"
     backend_address_pool_name  = "${var.vnet_name}-beap"
-#    backend_address_pool_name  = "BackEndAddressPool"
-#    backend_address_pool_name  = "${var.bepool_name}"
     backend_http_settings_name = "${var.vnet_name}-be-htst"
   }
 }
