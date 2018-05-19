@@ -22,7 +22,8 @@ resource "azurerm_lb" "loadbalancer" {
   resource_group_name = "${var.resource_group}"
 
   frontend_ip_configuration {
-    name                 = "PublicIPAddress"
+#    name                 = "PublicIPAddress"
+    name                  = "FrontEndIP"
 #    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
     private_ip_address_allocation = "dynamic"
   }
