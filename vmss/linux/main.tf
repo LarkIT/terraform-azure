@@ -54,7 +54,7 @@ resource "azurerm_lb_rule" "lb_rule" {
   backend_port                   = 80
   frontend_ip_configuration_name = "FrontEndIP"
   backend_address_pool_id        = "${azurerm_lb_backend_address_pool.bpepool.id}"
-  probe_id                       = "${azurerm_lb_probe.probe}"
+  probe_id                       = "${azurerm_lb_probe.probe.id}"
 }
 
 #resource "azurerm_lb_nat_pool" "lbnatpool" {
