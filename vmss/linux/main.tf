@@ -23,7 +23,8 @@ resource "azurerm_lb" "loadbalancer" {
 
   frontend_ip_configuration {
     name                 = "PublicIPAddress"
-    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
+#    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
+    private_ip_address_allocation = "dynamic"
   }
 }
 
