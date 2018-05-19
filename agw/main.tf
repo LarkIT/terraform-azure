@@ -35,7 +35,6 @@ resource "azurerm_application_gateway" "network" {
 
   gateway_ip_configuration {
     name      = "my-gateway-ip-configuration"
-#    subnet_id = "${var.subnet_id}"
     subnet_id = "${azurerm_subnet.subnet.id}"
   }
 
