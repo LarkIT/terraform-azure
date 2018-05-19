@@ -16,5 +16,5 @@ variable "capacity" {
 }
 
 variable "ip_address_list" {
-  type = list
+  type = "list"
 }
