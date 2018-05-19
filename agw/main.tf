@@ -49,11 +49,12 @@ resource "azurerm_application_gateway" "network" {
     public_ip_address_id = "${azurerm_public_ip.agw_pip.id}"
   }
 
-#  backend_address_pool {
+  backend_address_pool {
 ##    name = "${var.vnet_name}-beap"
 #     name = "BackEndAddressPool"
+     name = "${var.bepool_name}"
 ##    ip_address_list = [ "10.10.10.4" ]
-#  }
+  }
 
   backend_http_settings {
     name                  = "${var.vnet_name}-be-htst"
