@@ -44,7 +44,8 @@ resource "azurerm_lb_nat_pool" "lbnatpool" {
   frontend_port_start            = 50000
   frontend_port_end              = 50119
   backend_port                   = 22
-  frontend_ip_configuration_name = "PublicIPAddress"
+  #frontend_ip_configuration_name = "PublicIPAddress"
+  frontend_ip_configuration_name = "FrontEndIP"
 }
 
 resource "azurerm_virtual_machine_scale_set" "vmss" {
