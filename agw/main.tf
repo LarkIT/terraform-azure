@@ -9,8 +9,6 @@ resource "azurerm_resource_group" "rg" {
 
 resource "azurerm_subnet" "subnet" {
   name                 = "${var.environment}_${var.application_name}_agw_subnet"
-  #resource_group_name = "${azurerm_resource_group.rg.name}"
-  #resource_group_name = "test_themis_vnet"
   resource_group_name  = "${var.vnet_rg_name}"
   virtual_network_name = "${var.vnet_name}"
   address_prefix       = "10.10.30.0/24"
@@ -43,7 +41,7 @@ resource "azurerm_application_gateway" "network" {
 
   frontend_port {
     name = "${var.vnet_name}-feport"
-    port = 22
+    port = 80
   }
 
   frontend_ip_configuration {
@@ -59,7 +57,7 @@ resource "azurerm_application_gateway" "network" {
   backend_http_settings {
     name                  = "${var.vnet_name}-be-htst"
     cookie_based_affinity = "Disabled"
-    port                  = 22
+    port                  = 80
     protocol              = "Http"
     request_timeout       = 1
   }
