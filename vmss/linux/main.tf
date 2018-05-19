@@ -25,6 +25,7 @@ resource "azurerm_lb" "loadbalancer" {
 #    name                 = "PublicIPAddress"
     name                  = "FrontEndIP"
 #    public_ip_address_id = "${azurerm_public_ip.public_ip.id}"
+    subnet_id          = "${var.subnet_id}"    
     private_ip_address_allocation = "dynamic"
   }
 }
