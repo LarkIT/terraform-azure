@@ -1,4 +1,4 @@
-output "lb_id {
+output "lb_id" {
   value = "${azurerm_lb.loadbalancer.id}"
 }
 
