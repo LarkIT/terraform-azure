@@ -50,8 +50,8 @@ resource "azurerm_application_gateway" "network" {
   }
 
   backend_address_pool {
-    name = "${var.vnet_name}-beap"
-#     name = "BackEndAddressPool"
+#    name = "${var.vnet_name}-beap"
+     name = "BackEndAddressPool"
 #    ip_address_list = [ "10.10.10.4" ]
   }
 
