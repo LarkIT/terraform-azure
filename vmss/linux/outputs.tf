@@ -1,5 +1,3 @@
-azurerm_lb" "loadbalancer
-
 output "lb_id {
   value = "${azurerm_lb.loadbalancer.id}"
 }
