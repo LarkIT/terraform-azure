@@ -38,6 +38,23 @@ resource "azurerm_lb_backend_address_pool" "bpepool" {
   loadbalancer_id     = "${azurerm_lb.loadbalancer.id}"
 }
 
+resource "azurerm_lb_probe" "probe" {
+  resource_group_name = "${var.resource_group}"
+  loadbalancer_id     = "${azurerm_lb.loadbalancer.id}"
+  name                = "http-running-probe"
+  port                = 80
+}
+
+resource "azurerm_lb_rule" "lb_rule" {
+  resource_group_name            = "${azurerm_resource_group.test.name}"
+  loadbalancer_id                = "${azurerm_lb.test.id}"
+  name                           = "LBRule"
+  protocol                       = "Tcp"
+  frontend_port                  = 80
+  backend_port                   = 80
+  frontend_ip_configuration_name = "FrontEndIP"
+}
+
 #resource "azurerm_lb_nat_pool" "lbnatpool" {
 #  count                          = 3
 #  name                           = "ssh"
