@@ -70,11 +70,11 @@ resource "azurerm_application_gateway" "network" {
     protocol                       = "Http"
   }
 
-  request_routing_rule {
-    name                       = "${var.vnet_name}-rqrt"
-    rule_type                  = "Basic"
-    http_listener_name         = "${var.vnet_name}-httplstn"
-    backend_address_pool_name  = "${var.vnet_name}-beap"
-    backend_http_settings_name = "${var.vnet_name}-be-htst"
-  }
+#  request_routing_rule {
+#    name                       = "${var.vnet_name}-rqrt"
+#    rule_type                  = "Basic"
+#    http_listener_name         = "${var.vnet_name}-httplstn"
+#    backend_address_pool_name  = "${var.vnet_name}-beap"
+#    backend_http_settings_name = "${var.vnet_name}-be-htst"
+#  }
 }
