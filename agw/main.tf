@@ -28,9 +28,9 @@ resource "azurerm_application_gateway" "network" {
   location            = "${var.location}"
 
   sku {
-    name     = "Standard_Small"
-    tier     = "Standard"
-    capacity = 2
+    name     = "${var.vm_size}"
+    tier     = "${var.tier}"
+    capacity = "${var.capacity}"
   }
 
   gateway_ip_configuration {
