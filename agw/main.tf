@@ -28,7 +28,7 @@ resource "azurerm_application_gateway" "network" {
   location            = "${var.location}"
 
   sku {
-    name     = "${var.vm_size}"
+    name     = "${var.agw_size}"
     tier     = "${var.tier}"
     capacity = "${var.capacity}"
   }

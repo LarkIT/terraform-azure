@@ -4,7 +4,7 @@ variable "location" {}
 variable "vnet_rg_name" {}
 variable "vnet_name" {}
 
-variable "vm_size" {
+variable "agw_size" {
   default = "Standard_Small"
 }
 variable "tier" {
