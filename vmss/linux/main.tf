@@ -46,8 +46,8 @@ resource "azurerm_lb_probe" "probe" {
 }
 
 resource "azurerm_lb_rule" "lb_rule" {
-  resource_group_name            = "${azurerm_resource_group.test.name}"
-  loadbalancer_id                = "${azurerm_lb.test.id}"
+  resource_group_name            = "${var.resource_group}"
+  loadbalancer_id                = "${azurerm_lb.loadbalancer.id}"
   name                           = "LBRule"
   protocol                       = "Tcp"
   frontend_port                  = 80
