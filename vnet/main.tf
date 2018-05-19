@@ -40,3 +40,11 @@ resource "azurerm_subnet" "db_subnet" {
   address_prefix       = "${lookup(local.network, "db")}"
   depends_on           = ["azurerm_virtual_network.vnet"]
 }
+
+resource "azurerm_subnet" "domain_subnet" {
+  name                 = "${var.environment}_${var.application_name}_domain_subnet"
+  resource_group_name  = "${local.resource_group}"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  address_prefix       = "${lookup(local.network, "domain")}"
+  depends_on           = ["azurerm_virtual_network.vnet"]
+}
