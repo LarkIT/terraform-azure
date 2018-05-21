@@ -7,6 +7,7 @@ variable "vnet_name" {}
 variable "agw_size" {
   default = "Standard_Small"
 }
+
 variable "tier" {
   default = "Standard"
 }
@@ -17,4 +18,8 @@ variable "capacity" {
 
 variable "ip_address_list" {
   type = "list"
+}
+
+variable "port" {
+  default = "80"
 }
