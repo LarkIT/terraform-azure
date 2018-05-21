@@ -3,6 +3,7 @@ variable "environment" {}
 variable "location" {}
 variable "vnet_rg_name" {}
 variable "vnet_name" {}
+variable "agw_subnet" {}
 
 variable "agw_size" {
   default = "Standard_Small"
