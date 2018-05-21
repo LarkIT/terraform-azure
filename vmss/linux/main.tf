@@ -45,19 +45,6 @@ resource "azurerm_lb_rule" "lb_rule" {
   probe_id                       = "${azurerm_lb_probe.probe.id}"
 }
 
-#resource "azurerm_lb_nat_pool" "lbnatpool" {
-#  count                          = 3
-#  name                           = "ssh"
-#  resource_group_name            = "${var.resource_group}"
-#  loadbalancer_id                = "${azurerm_lb.loadbalancer.id}"
-#  protocol                       = "Tcp"
-#  frontend_port_start            = 50000
-#  frontend_port_end              = 50119
-#  backend_port                   = 22
-#  frontend_ip_configuration_name = "PublicIPAddress"
-#  frontend_ip_configuration_name = "FrontEndIP"
-#}
-
 resource "azurerm_virtual_machine_scale_set" "vmss" {
   name                = "${var.environment}_${var.application_name}_vmss"
   location            = "${var.location}"
@@ -67,9 +54,9 @@ resource "azurerm_virtual_machine_scale_set" "vmss" {
   #tags                = "${local.tags}"
 
   sku {
-    name     = "Standard_A0"
-    tier     = "Standard"
-    capacity = 2
+    name     = "${var.vmss_size}"
+    tier     = "${var.tier}"
+    capacity = "${var.capacity}"
   }
   storage_profile_image_reference {
     publisher = "Canonical"

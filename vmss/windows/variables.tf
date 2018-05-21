@@ -9,6 +9,18 @@ variable "admin_username" {
   default = "azure"
 } 
 
+variable "vmss_size" {
+  default = "Standard_A0"
+}
+
+variable "tier" {
+  default = "Standard"
+}
+
+variable "capacity" {
+  default = "2"
+}
+
 variable "tags" {
   default = {
     builtby = "Terraform"
