@@ -1,4 +1,4 @@
-**.plan
-**private.tfvars
-**.terraform
-**.backup
+**/.plan
+**/private.tfvars
+**/.terraform
+**/*.backup
