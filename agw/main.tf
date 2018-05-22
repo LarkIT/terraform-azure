@@ -3,7 +3,6 @@ resource "azurerm_public_ip" "agw_pip" {
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "dynamic"
-  depends_on                   = ["azurerm_resource_group.rg"]
 }
 
 resource "azurerm_application_gateway" "network" {
