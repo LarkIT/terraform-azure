@@ -30,21 +30,21 @@ resource "azurerm_network_interface" "nic" {
 }
 
 resource "azurerm_virtual_machine" "virtual_machine" {
-  count                 = "${var.number_servers}"
-  name                  = "${var.application_name}_${var.hostname}_vm_${count.index}"
-  location              = "${var.location}"
-  resource_group_name   = "${var.resource_group}"
-  network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
-  vm_size               = "${var.vm_size}"
+  count                            = "${var.number_servers}"
+  name                             = "${var.application_name}_${var.hostname}_vm_${count.index}"
+  location                         = "${var.location}"
+  resource_group_name              = "${var.resource_group}"
+  network_interface_ids            = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
+  vm_size                          = "${var.vm_size}"
+  delete_os_disk_on_termination    = true
+  delete_data_disks_on_termination = true
 
   storage_os_disk {
-    name                             = "${var.application_name}_${var.hostname}_osdisk_${count.index}"
-    caching                          = "ReadWrite"
-    create_option                    = "FromImage"
-    managed_disk_type                = "${var.managed_disk_type}"
-    disk_size_gb                     = "${var.os_disk_size}"
-    delete_os_disk_on_termination    = true
-    delete_data_disks_on_termination = true
+    name              = "${var.application_name}_${var.hostname}_osdisk_${count.index}"
+    caching           = "ReadWrite"
+    create_option     = "FromImage"
+    managed_disk_type = "${var.managed_disk_type}"
+    disk_size_gb      = "${var.os_disk_size}"
   }
 
   storage_image_reference {
