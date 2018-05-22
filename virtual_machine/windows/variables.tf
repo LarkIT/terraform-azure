@@ -18,3 +18,11 @@ variable "number_servers" {
 variable "os_disk_size" {
   default = "128"
 }
+
+variable "managed_disk_type" {
+  default = "Premium_LRS"
+}
+
+variable "vm_size" {
+  default = "Standard_DS1_v2"
+}
