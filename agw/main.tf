@@ -1,10 +1,3 @@
-resource "azurerm_subnet" "subnet" {
-  name                 = "${var.environment}_${var.application_name}_agw_subnet"
-  resource_group_name  = "${var.vnet_rg_name}"
-  virtual_network_name = "${var.vnet_name}"
-  address_prefix       = "${var.agw_subnet}"
-}
-
 resource "azurerm_public_ip" "agw_pip" {
   name                         = "${var.environment}_${var.application_name}_agw_pip"
   location                     = "${var.location}"
@@ -26,7 +19,7 @@ resource "azurerm_application_gateway" "network" {
 
   gateway_ip_configuration {
     name      = "my-gateway-ip-configuration"
-    subnet_id = "${azurerm_subnet.subnet.id}"
+    subnet_id = "${var.agw_subnet}"
   }
 
   frontend_port {

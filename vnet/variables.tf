@@ -24,6 +24,9 @@ variable "network" {
   }
 }
 
+variable "agw_subnet" {
+  default = "10.10.30.0/24"
+}
 variable "dns_servers" {
   default = ["10.10.0.7", "10.10.0.8"]
 }
