@@ -1,3 +1,4 @@
+variable "resource_group" {}
 variable "application_name" {}
 variable "environment" {}
 variable "location" {}
