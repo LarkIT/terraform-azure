@@ -7,7 +7,7 @@ resource "azurerm_public_ip" "agw_pip" {
 
 resource "azurerm_application_gateway" "network" {
   name                = "${var.environment}_${var.application_name}-gateway-12345"
-  resource_group_name = "${azurerm_resource_group.rg.name}"
+  resource_group_name = "${var.resource_group}"
   location            = "${var.location}"
 
   sku {
