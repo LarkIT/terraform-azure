@@ -38,10 +38,13 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   vm_size               = "${var.vm_size}"
 
   storage_os_disk {
-    name              = "${var.application_name}_${var.hostname}_osdisk_${count.index}"
-    caching           = "ReadWrite"
-    create_option     = "FromImage"
-    managed_disk_type = "${var.managed_disk_type}"
+    name                             = "${var.application_name}_${var.hostname}_osdisk_${count.index}"
+    caching                          = "ReadWrite"
+    create_option                    = "FromImage"
+    managed_disk_type                = "${var.managed_disk_type}"
+    disk_size_gb                     = "${var.os_disk_size}"
+    delete_os_disk_on_termination    = true
+    delete_data_disks_on_termination = true
   }
 
   storage_image_reference {
