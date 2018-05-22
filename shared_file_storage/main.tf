@@ -7,7 +7,7 @@ resource "azurerm_storage_account" "storage" {
 }
 
 resource "azurerm_storage_share" "file_share" {
-  name                 = "${var.file_share_name}"
+  name                 = "${var.environment}_${var.file_share_name}"
   resource_group_name  = "${var.resource_group}"
   storage_account_name = "${azurerm_storage_account.storage.name}"
   quota                = "${var.quota}"
