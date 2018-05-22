@@ -10,7 +10,7 @@ variable "account_tier" {
 }
 
 variable "account_replication_type" {
-  default = "LRS"
+  default = "RA-GRS"
 }
 
 variable "quota" {
