@@ -35,13 +35,13 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   location              = "${var.location}"
   resource_group_name   = "${var.resource_group}"
   network_interface_ids = ["${element(azurerm_network_interface.nic.*.id, count.index)}"]
-  vm_size               = "Standard_DS1_v2"
+  vm_size               = "${var.vm_size}"
 
   storage_os_disk {
     name              = "${var.application_name}_${var.hostname}_osdisk_${count.index}"
     caching           = "ReadWrite"
     create_option     = "FromImage"
-    managed_disk_type = "Premium_LRS"
+    managed_disk_type = "${var.managed_disk_type}"
   }
 
   storage_image_reference {
