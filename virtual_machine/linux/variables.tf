@@ -15,6 +15,10 @@ variable "number_servers" {
   default = "1"
 }
 
+variable "os_disk_size" {
+  default = "128"
+}
+
 variable "managed_disk_type" {
   default = "Premium_LRS"
 }
