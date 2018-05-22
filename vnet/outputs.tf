@@ -30,6 +30,10 @@ output "domain_subnet_id" {
   value = "${azurerm_subnet.domain_subnet.id}"
 }
 
+output "agw_subnet_id" {
+  value = "${azurerm_subnet.agw_subnet.id}"
+}
+
 output "vnet_name" {
   value = "${azurerm_virtual_network.vnet.name}"
 }
