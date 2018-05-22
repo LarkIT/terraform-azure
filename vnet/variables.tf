@@ -15,6 +15,7 @@ variable "network" {
       app    = "10.10.10.0/24"
       db     = "10.10.20.0/24"
       domain = "10.10.30.0/24"
+      agw    = "10.10.40.0/24"
     }
 
     prod = {
@@ -22,12 +23,9 @@ variable "network" {
       app    = "10.10.110.0/24"
       db     = "10.10.120.0/24"
       domain = "10.10.130.0/24"
+      agw    = "10.10.140.0/24"
     }
   }
-}
-
-variable "agw_subnet" {
-  default = "10.10.30.0/24"
 }
 
 variable "dns_servers" {
