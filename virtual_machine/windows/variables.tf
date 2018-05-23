@@ -26,3 +26,7 @@ variable "managed_disk_type" {
 variable "vm_size" {
   default = "Standard_DS1_v2"
 }
+
+variable "public_ip_allocation" {
+  default = "dynamic"
+}
