@@ -32,5 +32,5 @@ variable "public_ip_allocation" {
 }
 
 variable "start_index" {
-  default = "0"
+  default = 0
 }
