@@ -35,7 +35,8 @@ resource "azurerm_network_interface" "nic" {
 
 resource "azurerm_virtual_machine" "virtual_machine" {
   count                            = "${var.number_servers}"
-  name                             = "${var.application_name}_${var.hostname}_vm_${count.index + + var.start_index}"
+  #name                             = "${var.application_name}_${var.hostname}_vm_${count.index + + var.start_index}"
+  name                             = "${var.application_name}_${var.hostname}_vm_${count.index + var.start_index}"
   location                         = "${var.location}"
   resource_group_name              = "${var.resource_group}"
   network_interface_ids            = ["${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}"]
