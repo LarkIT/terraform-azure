@@ -6,6 +6,7 @@ variable "subnet_id" {}
 variable "hostname" {}
 variable "admin_password" {}
 variable "security_group" {}
+variable "server_type" {}
 
 variable "admin_username" {
   default = "azure"
@@ -33,4 +34,21 @@ variable "public_ip_allocation" {
 
 variable "start_index" {
   default = 0
+}
+
+variable "storage_image_reference" {
+  default = {
+    sql_server = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2016"
+      sku       = "Standard"
+      version   = "latest"
+    }
+    windows_server = {
+      publisher = "MicrosoftWindowsServer"
+      offer     = "WindowsServer"
+      sku       = "2016-Datacenter"
+      version   = "latest"
+    }
+  }
 }

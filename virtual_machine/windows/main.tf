@@ -1,3 +1,7 @@
+locals {
+  storage_image_reference = "${var.storage_image_reference[ "${var.server_type}" ]}"
+}
+
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.number_servers}"
   name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index + var.start_index}"
@@ -48,10 +52,10 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   }
 
   storage_image_reference {
-    publisher = "MicrosoftWindowsServer"
-    offer     = "WindowsServer"
-    sku       = "2016-Datacenter"
-    version   = "latest"
+    publisher = "${local.storage_image_reference["publisher"]}"
+    offer     = "${local.storage_image_reference["offer"]}"
+    sku       = "${local.storage_image_reference["sku"]}"
+    version   = "${local.storage_image_reference["version"]}"
   }
 
   os_profile {
