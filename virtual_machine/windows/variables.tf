@@ -30,3 +30,7 @@ variable "vm_size" {
 variable "public_ip_allocation" {
   default = "dynamic"
 }
+
+variable "start_index" {
+  default = 0
+}
