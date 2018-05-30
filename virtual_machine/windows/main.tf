@@ -1,6 +1,7 @@
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.number_servers}"
-  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index + 1}"
+#  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index + 1}"
+  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index}"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "${var.public_ip_allocation}"
