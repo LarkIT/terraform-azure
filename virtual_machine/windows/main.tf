@@ -1,7 +1,7 @@
 resource "azurerm_public_ip" "public_ip" {
   count                        = "${var.number_servers}"
-#  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index + 1}"
-  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index}"
+  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index + var.start_index}"
+#  name                         = "${var.application_name}_${var.hostname}_public_ip_${count.index}"
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "${var.public_ip_allocation}"
@@ -13,15 +13,15 @@ resource "azurerm_public_ip" "public_ip" {
 
 resource "azurerm_network_interface" "nic" {
   count                     = "${var.number_servers}"
-#  name                      = "${var.application_name}_${var.hostname}_nic_${count.index + var.start_index}"
-  name                      = "${var.application_name}_${var.hostname}_nic_${count.index}"
+  name                      = "${var.application_name}_${var.hostname}_nic_${count.index + var.start_index}"
+#  name                      = "${var.application_name}_${var.hostname}_nic_${count.index}"
   location                  = "${var.location}"
   resource_group_name       = "${var.resource_group}"
   network_security_group_id = "${var.security_group}"
 
   ip_configuration {
-    #name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index + var.start_index}"
-    name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index}"
+    name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index + var.start_index}"
+    #name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index}"
     subnet_id                     = "${var.subnet_id}"
     private_ip_address_allocation = "dynamic"
     #public_ip_address_id          = "${element(azurerm_public_ip.public_ip.*.id, count.index + var.start_index)}"
