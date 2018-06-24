@@ -32,6 +32,10 @@ variable "public_ip_allocation" {
   default = "dynamic"
 }
 
+variable "nic_ip_allocation" {
+  default = "dynamic"
+}
+
 variable "start_index" {
   default = 0
 }
