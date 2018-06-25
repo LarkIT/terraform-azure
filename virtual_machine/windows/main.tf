@@ -25,6 +25,7 @@ resource "azurerm_network_interface" "nic" {
     name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index + var.start_index}"
     subnet_id                     = "${var.subnet_id}"
     private_ip_address_allocation = "${var.nic_ip_allocation}"
+    private_ip_address            = "${var.private_ip_address}"
     public_ip_address_id          = "${element(azurerm_public_ip.public_ip.*.id, count.index + var.start_index)}"
   }
 
