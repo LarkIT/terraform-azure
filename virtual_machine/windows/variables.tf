@@ -62,6 +62,6 @@ variable "storage_image_reference" {
 }
 
 variable "additional_nics" {
-  type    = "map"
-  default = {}
+  type    = "list"
+  default = []
 }
