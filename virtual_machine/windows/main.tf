@@ -39,7 +39,7 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   name                             = "${var.application_name}_${var.hostname}_vm_${count.index + var.start_index}"
   location                         = "${var.location}"
   resource_group_name              = "${var.resource_group}"
-  primary_network_interface_id     = ["${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}" ]
+  primary_network_interface_id     = "${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}"
 #  network_interface_ids            = ["${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}", "${var.additional_nics}" ]
   network_interface_ids            = [ "${var.additional_nics}" ]
   vm_size                          = "${var.vm_size}"
