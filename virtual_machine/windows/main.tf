@@ -24,7 +24,8 @@ resource "azurerm_network_interface" "nic" {
   ip_configuration {
     name                          = "${var.application_name}_${var.hostname}_nic_config_${count.index + var.start_index}"
     subnet_id                     = "${var.subnet_id}"
-    private_ip_address_allocation = "dynamic"
+    private_ip_address_allocation = "${var.nic_ip_allocation}"
+    private_ip_address            = "${var.private_ip_address}"
     public_ip_address_id          = "${element(azurerm_public_ip.public_ip.*.id, count.index + var.start_index)}"
   }
 
@@ -38,7 +39,8 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   name                             = "${var.application_name}_${var.hostname}_vm_${count.index + var.start_index}"
   location                         = "${var.location}"
   resource_group_name              = "${var.resource_group}"
-  network_interface_ids            = ["${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}"]
+  primary_network_interface_id     = "${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}"
+  network_interface_ids            = ["${element(azurerm_network_interface.nic.*.id, count.index + var.start_index)}", "${var.additional_nics}" ]
   vm_size                          = "${var.vm_size}"
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true

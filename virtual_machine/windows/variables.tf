@@ -32,6 +32,14 @@ variable "public_ip_allocation" {
   default = "dynamic"
 }
 
+variable "nic_ip_allocation" {
+  default = "dynamic"
+}
+
+variable "private_ip_address" {
+  default = ""
+}
+
 variable "start_index" {
   default = 0
 }
@@ -51,4 +59,9 @@ variable "storage_image_reference" {
       version   = "latest"
     }
   }
+}
+
+variable "additional_nics" {
+  type    = "list"
+  default = []
 }
