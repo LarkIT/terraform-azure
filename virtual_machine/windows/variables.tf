@@ -65,3 +65,7 @@ variable "additional_nics" {
   type    = "list"
   default = []
 }
+
+variable "domain_name_label" {
+  default = ""
+}

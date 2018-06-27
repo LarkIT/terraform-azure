@@ -8,6 +8,7 @@ resource "azurerm_public_ip" "public_ip" {
   location                     = "${var.location}"
   resource_group_name          = "${var.resource_group}"
   public_ip_address_allocation = "${var.public_ip_allocation}"
+  domain_name_label            = "${var.domain_name_label}"
 
   tags {
     builtby = "Terraform"
