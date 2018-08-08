@@ -52,10 +52,22 @@ variable "storage_image_reference" {
       sku       = "Standard"
       version   = "latest"
     }
+    sql_server_dev = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2017-WS2016"
+      sku       = "SQLDEV"
+      version   = "latest"
+    }
     sql_server_2008 = {
       publisher = "MicrosoftSQLServer"
       offer     = "SQL2008R2SP3-WS2008R2SP1"
       sku       = "Standard"
+      version   = "latest"
+    }
+    sql_server_2008_express = {
+      publisher = "MicrosoftSQLServer"
+      offer     = "SQL2008R2SP3-WS2008R2SP1"
+      sku       = "Express"
       version   = "latest"
     }
     windows_server = {
