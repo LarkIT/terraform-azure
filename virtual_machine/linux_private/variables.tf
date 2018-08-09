@@ -6,6 +6,7 @@ variable "subnet_id" {}
 variable "hostname" {}
 variable "ssh_public_key" {}
 variable "security_group" {}
+variable "server_type" {}
 
 variable "private_ip_address" {
   default = ""

@@ -38,6 +38,13 @@ resource "azurerm_virtual_machine" "virtual_machine" {
     managed_disk_type = "${var.managed_disk_type}"
     disk_size_gb      = "${var.os_disk_size}"
   }
+   
+  storage_image_reference {
+    publisher = "${local.storage_image_reference["publisher"]}"
+    offer     = "${local.storage_image_reference["offer"]}"
+    sku       = "${local.storage_image_reference["sku"]}"
+    version   = "${local.storage_image_reference["version"]}"
+  }
 
   os_profile {
     computer_name  = "${var.hostname}-${count.index}"
