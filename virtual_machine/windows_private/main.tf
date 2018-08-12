@@ -61,3 +61,81 @@ resource "azurerm_virtual_machine" "virtual_machine" {
     builtby = "Terraform"
   }
 }
+
+resource "azurerm_metric_alertrule" "metric_alertrule_cpu" {
+  count               = "${var.number_servers}"
+  name                = "${var.application_name}_${var.hostname}_alertcpu_${count.index + var.start_index}"
+  resource_group_name = "${var.resource_group}"
+  location            = "${var.location}"
+
+  description = "An alert rule to watch the metric Percentage CPU"
+
+  enabled = true
+
+  resource_id = "${element(azurerm_virtual_machine.virtual_machine.*.id, count.index + var.start_index)}"
+  metric_name = "Percentage CPU"
+  operator    = "GreaterThan"
+  threshold   = "${var.cpu_threshold}"
+  aggregation = "Average"
+  period      = "PT5M"
+
+  email_action {
+    send_to_service_owners = false
+
+    custom_emails = [
+      "${var.support_email}",
+    ]
+  }
+}
+
+resource "azurerm_metric_alertrule" "metric_alertrule_memory" {
+  count               = "${var.number_servers}"
+  name                = "${var.application_name}_${var.hostname}_alertmemory_${count.index + var.start_index}"
+  resource_group_name = "${var.resource_group}"
+  location            = "${var.location}"
+
+  description = "An alert rule to watch the metric Percentage Memory"
+
+  enabled = true
+
+  resource_id = "${element(azurerm_virtual_machine.virtual_machine.*.id, count.index + var.start_index)}"
+  metric_name = "\\Memory\\Available Bytes"
+  operator    = "LessThan"
+  threshold   = "${var.memory_threshold}"
+  aggregation = "Average"
+  period      = "PT5M"
+
+  email_action {
+    send_to_service_owners = false
+
+    custom_emails = [
+      "${var.support_email}",
+    ]
+  }
+}
+
+resource "azurerm_metric_alertrule" "metric_alertrule_diskusage" {
+  count               = "${var.number_servers}"
+  name                = "${var.application_name}_${var.hostname}_alertdiskusage_${count.index + var.start_index}"
+  resource_group_name = "${var.resource_group}"
+  location            = "${var.location}"
+
+  description = "An alert rule to watch the metric Percentage Diskusage"
+
+  enabled = true
+
+  resource_id = "${element(azurerm_virtual_machine.virtual_machine.*.id, count.index + var.start_index)}"
+  metric_name = "\\LogicalDisk(_Total)\\% Free Space"
+  operator    = "LessThan"
+  threshold   = "${var.diskusage_threshold}"
+  aggregation = "Average"
+  period      = "PT5M"
+
+  email_action {
+    send_to_service_owners = false
+
+    custom_emails = [
+      "${var.support_email}",
+    ]
+  }
+}
