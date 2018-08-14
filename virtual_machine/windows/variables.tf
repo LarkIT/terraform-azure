@@ -7,6 +7,7 @@ variable "hostname" {}
 variable "admin_password" {}
 variable "security_group" {}
 variable "server_type" {}
+variable "support_email" {}
 
 variable "admin_username" {
   default = "azure"
@@ -82,4 +83,16 @@ variable "storage_image_reference" {
 variable "additional_nics" {
   type    = "list"
   default = []
+}
+
+variable "cpu_threshold" {
+  default = "90"
+}
+
+variable "memory_threshold" {
+  default = "10"
+}
+
+variable "diskusage_threshold" {
+  default = "10"
 }
