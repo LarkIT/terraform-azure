@@ -44,7 +44,6 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   vm_size                          = "${var.vm_size}"
   delete_os_disk_on_termination    = true
   delete_data_disks_on_termination = true
-  provision_vm_agent               = true
 
   storage_os_disk {
     name              = "${var.application_name}_${var.hostname}_osdisk_${count.index + var.start_index}"
@@ -68,7 +67,7 @@ resource "azurerm_virtual_machine" "virtual_machine" {
   }
 
   os_profile_windows_config {
-    provision_vm_agent = false
+    provision_vm_agent = true
   }
 
   tags {
