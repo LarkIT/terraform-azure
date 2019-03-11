@@ -55,3 +55,10 @@ resource "azurerm_subnet" "db_subnet" {
 #  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
 #  address_prefix       = "${lookup(local.network, "agw")}"
 #}
+
+resource "azurerm_subnet" "dbinst_subnet" {
+  name                 = "${var.environment}_${var.application_name}_dbinst_subnet"
+  resource_group_name  = "${local.resource_group}"
+  virtual_network_name = "${azurerm_virtual_network.vnet.name}"
+  address_prefix       = "${lookup(local.network, "dbinst")}"
+}
