@@ -3,7 +3,7 @@ variable "environment" {}
 variable "location" {}
 
 variable "address_space" {
-  default = "10.10.0.0/16"
+  default = ["10.10.0.0/18","10.10.64.0/19","10.10.96.0/22"]
 }
 
 variable "network" {
@@ -14,8 +14,8 @@ variable "network" {
       dmz    = "10.10.0.0/24"
       app    = "10.10.10.0/24"
       db     = "10.10.20.0/24"
-      domain = "10.10.30.0/24"
-      agw    = "10.10.40.0/24"
+      #domain = "10.10.30.0/24"
+      #agw    = "10.10.40.0/24"
     }
 
     prod = {
@@ -29,5 +29,5 @@ variable "network" {
 }
 
 variable "dns_servers" {
-  default = ["10.10.0.7", "10.10.0.8"]
+  default = ["10.10.130.4", "10.10.130.5"]
 }
