@@ -51,14 +51,14 @@ resource "azurerm_virtual_machine" "virtual_machine" {
     admin_username = "${var.admin_username}"
   }
 
-  #os_profile_linux_config {
-  #  disable_password_authentication = true
+  os_profile_linux_config {
+    disable_password_authentication = true
 
-  #  ssh_keys {
-  #    path     = "/home/${var.admin_username}/.ssh/authorized_keys"
-  #    key_data = "${file("${var.ssh_public_key}")}"
-  #  }
-  #}
+    ssh_keys {
+      path     = "/home/${var.admin_username}/.ssh/authorized_keys"
+      key_data = "${file("${var.ssh_public_key}")}"
+    }
+  }
 
   tags {
     builtby = "Terraform"
