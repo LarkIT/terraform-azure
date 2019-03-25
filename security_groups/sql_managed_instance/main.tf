@@ -17,3 +17,17 @@ resource "azurerm_network_security_rule" "allow_management_inbound" {
   resource_group_name         = "${var.resource_group}"
   network_security_group_name = "${azurerm_network_security_group.sql_managed_instance.name}"
 }
+
+resource "azurerm_network_security_rule" "allow_subnet_inbound" {
+  name                        = "allow_subnet_inbound"
+  priority                    = 200
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  source_port_range           = "*"
+  destination_port_ranges     = [9000,9003,1438,1440,1452]
+  source_address_prefix       = "${lookup(local.network, "dbinst")}"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.resource_group}"
+  network_security_group_name = "${azurerm_network_security_group.sql_managed_instance.name}"
+}

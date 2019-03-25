@@ -61,5 +61,4 @@ resource "azurerm_subnet" "dbinst_subnet" {
   resource_group_name       = "${local.resource_group}"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   address_prefix            = "${lookup(local.network, "dbinst")}"
-  #network_security_group_id = "${azurerm_network_security_group.nsg-themis-test-sql3-mi-1.id}"
 }
