@@ -4,16 +4,16 @@ resource "azurerm_network_security_group" "sql_managed_instance" {
   resource_group_name = "${var.resource_group}"
 }
 
-#resource "azurerm_network_security_rule" "rdp" {
-#  name                        = "rdp"
-#  priority                    = 100
-#  direction                   = "Inbound"
-#  access                      = "Allow"
-#  protocol                    = "Tcp"
-#  source_port_range           = "*"
-#  destination_port_range      = "3389"
-#  source_address_prefix       = "*"
-#  destination_address_prefix  = "*"
-#  resource_group_name         = "${var.resource_group}"
-#  network_security_group_name = "${azurerm_network_security_group.windows.name}"
-#}
+resource "azurerm_network_security_rule" "allow_management_inbound" {
+  name                        = "allow_management_inbound"
+  priority                    = 100
+  direction                   = "Inbound"
+  access                      = "Allow"
+  protocol                    = "TCP"
+  source_port_range           = "*"
+  destination_port_ranges     = [9000,9003,1438,1440,1452]
+  source_address_prefix       = "*"
+  destination_address_prefix  = "*"
+  resource_group_name         = "${var.resource_group}"
+  network_security_group_name = "${azurerm_network_security_group.sql_managed_instance.name}"
+}
