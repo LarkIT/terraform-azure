@@ -87,9 +87,3 @@ resource "azurerm_network_security_rule" "sftp" {
   resource_group_name         = "${var.resource_group}"
   network_security_group_name = "${azurerm_network_security_group.windows.name}"
 }
-
-resource "azurerm_network_security_group" "nsg-themis-test-sql3-mi-1" {
-  name                = "nsg-themis-test-sql3-mi-1"
-  location            = "${var.location}"
-  resource_group_name = "${var.resource_group}"
-}
