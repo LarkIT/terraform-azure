@@ -1,5 +1,5 @@
-resource "azurerm_network_security_group" "nsg-themis-test-sql3-mi-1" {
-  name                = "nsg-themis-test-sql3-mi-1"
+resource "azurerm_network_security_group" "sql_managed_instance" {
+  name                = "sql_managed_instance"
   location            = "${var.location}"
   resource_group_name = "${var.resource_group}"
 }
