@@ -1,10 +1,10 @@
-variable "application_name" {}
-variable "environment" {}
 variable "location" {}
 
-variable "address_space" {
-  default = ["10.10.0.0/18","10.10.64.0/19","10.10.96.0/22"]
-}
+variable "environment" {}
+
+variable "resource_group" {}
+
+variable "application_name" {}
 
 variable "network" {
   description = "Subnet layout for network zones"
@@ -27,8 +27,4 @@ variable "network" {
       agw    = "10.10.140.0/24"
     }
   }
-}
-
-variable "dns_servers" {
-  default = ["10.10.130.4", "10.10.130.5"]
 }
