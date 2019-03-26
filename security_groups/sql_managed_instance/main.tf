@@ -189,3 +189,4 @@ resource "azurerm_route_table" "sql_managed_instance" {
     address_prefix = "0.0.0.0/0"
     next_hop_type  = "Internet"
   }
+}
