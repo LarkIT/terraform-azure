@@ -29,7 +29,7 @@ resource "azurerm_network_security_rule" "allow_subnet_inbound" {
   priority                    = 200
   direction                   = "Inbound"
   access                      = "Allow"
-  protocol                    = "TCP"
+  protocol                    = "*"
   source_port_range           = "*"
   destination_port_range      = "*"
   source_address_prefix       = "${data.azurerm_subnet.dbinst_subnet.address_prefix}"
@@ -177,3 +177,15 @@ resource "azurerm_network_security_rule" "allow_geodr_outbound" {
   resource_group_name         = "${var.resource_group}"
   network_security_group_name = "${azurerm_network_security_group.sql_managed_instance.name}"
 }
+
+resource "azurerm_route_table" "sql_managed_instance" {
+  name                          = "sql_managed_instance"
+  location                      = "${var.location}"
+  resource_group_name           = "${var.resource_group}"
+  disable_bgp_route_propagation = false
+
+  route {
+    name           = "default-route"
+    address_prefix = "0.0.0.0/0"
+    next_hop_type  = "Internet"
+  }

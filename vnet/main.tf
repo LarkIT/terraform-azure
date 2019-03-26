@@ -1,3 +1,8 @@
+data "azurerm_network_security_group" "sql_managed_instance" {
+  name                = "sql_managed_instance"
+  resource_group_name = "${local.resource_group}"
+}
+
 locals {
   resource_group = "${var.environment}_${var.application_name}_vnet"
   network        = "${var.network[ "${var.environment}" ]}"
@@ -61,4 +66,5 @@ resource "azurerm_subnet" "dbinst_subnet" {
   resource_group_name       = "${local.resource_group}"
   virtual_network_name      = "${azurerm_virtual_network.vnet.name}"
   address_prefix            = "${lookup(local.network, "dbinst")}"
+  network_security_group_id = "${data.azurerm_network_security_group.sql_managed_instance.id}"
 }
