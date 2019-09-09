@@ -5,10 +5,10 @@ variable "resource_group" {}
 variable "vnet" {}
 
 variable "vng_address_prefix"{
-  default = "10.40.100.0/28"
+  default = "10.40.200.0/28"
 }
 
 variable "vpn_client_address_space" {
   type    = "list"
-  default = ["10.40.101.0/24"]
+  default = ["10.40.201.0/24"]
 }
