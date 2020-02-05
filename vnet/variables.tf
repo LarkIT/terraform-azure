@@ -3,7 +3,7 @@ variable "environment" {}
 variable "location" {}
 
 variable "address_space" {
-  default = ["10.40.0.0/16"]
+  default = ["10.60.0.0/16"]
 }
 
 variable "network" {
@@ -30,6 +30,12 @@ variable "network" {
       db     = "10.10.120.0/24"
       domain = "10.10.130.0/24"
       agw    = "10.10.140.0/24"
+    }
+    prod-ssn = {
+      dmz    = "10.60.100.0/24"
+      app    = "10.60.110.0/24"
+      db     = "10.60.120.0/24"
+      #dbinst = "10.60.130.0/24"
     }
   }
 }
