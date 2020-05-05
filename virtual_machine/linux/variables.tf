@@ -42,5 +42,11 @@ variable "storage_image_reference" {
       sku       = "16.04.0-LTS"
       version   = "latest"
     }
+    ubuntu18 = {
+      publisher = "Canonical"
+      offer     = "UbuntuServer"
+      sku       = "18.04-LTS"
+      version   = "latest"
+    }
   }
 }
